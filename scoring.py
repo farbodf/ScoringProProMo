@@ -13,14 +13,15 @@ for line in test_data:
         probabilities = p.stdout.readline()
         probabilities = probabilities.split(",")
         probabilities = [float(a) for a in probabilities]
-        if probabilities[value] != 0 and sum(probabilities) <= 1:
+        if sum(probabilities) <= 1.1:
             row_score += math.log(probabilities[value])
         else:
+            print "holy shmoly"
             break
         print>>p.stdin, value
     print row_score
     score += row_score
     print c
     c += 1
-p.communicate("n\n")[0]
+print>>p.stdin, "n\n"
 print("total score: ", score)
